@@ -11,8 +11,10 @@ export default function Results({ isLoading, error, pokemon }) {
   } else if (pokemon) {
     return (
       <section className='results'>
-        <p>{`${pokemon.name}`}</p>
-      </section>
+        <img src={`${pokemon['sprites']['other']['official-artwork']['front_default']}`}></img>
+        {pokemon.types.map((type) => <p>{`${type.type.name}`}</p>
+        )}
+      </section >
     )
   }
 }

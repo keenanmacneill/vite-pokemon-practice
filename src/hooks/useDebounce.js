@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
 export default function useDebounce(text) {
-  const [debText, setDebText] = useState('')
+  let [debText, setDebText] = useState(null)
   useEffect(() => {
-    const timeout = setTimeout(() => setDebText(text), 1000);
+    let timeout = setTimeout(() => setDebText(text), 1000);
     return () => {
       clearTimeout(timeout)
     }
