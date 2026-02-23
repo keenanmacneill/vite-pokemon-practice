@@ -10,14 +10,16 @@ export default function Header({ inputText, setInputText, setQuery }) {
   })
 
   return (
-    <div>
+    <div id='header'>
       <h1>Pokédex</h1>
-      <input
-        type='search' placeholder='Search for a Pokemon...'
-        value={inputText} onChange={handleChange}
-        onKeyDown={handleEnter}>
-      </input>
-      <button onClick={handleClick}>Search</button>
+      <div id='search'>
+        <input
+          type='search' placeholder='Search for a Pokemon...'
+          value={inputText} onChange={handleChange}
+          onKeyDown={handleEnter}>
+        </input>
+        <button onClick={handleClick}>Search</button>
+      </div>
     </div>
   )
 }

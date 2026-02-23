@@ -34,7 +34,11 @@ function App() {
         toggleFavorite={toggleFavorite}
         cap={cap}
         query={query} />
-      <Details pokemon={pokemon} />
+      <Details pokemon={pokemon}
+        error={error}
+        isLoading={isLoading}
+        query={query}
+        cap={cap} />
       <Favorites
         favorites={favorites}
         setQuery={setQuery}
