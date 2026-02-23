@@ -1,7 +1,7 @@
-import { useState } from "react"
+import useLocalStorage from "./useLocalStorage";
 
 export default function useFavorites() {
-  let [favorites, setFavorites] = useState([])
+  let [favorites, setFavorites] = useLocalStorage('favorites', [])
   let toggleFavorite = (pokemon) => {
     if (!pokemon) {
       return

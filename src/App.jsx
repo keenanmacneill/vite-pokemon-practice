@@ -16,7 +16,7 @@ function App() {
   let { pokemon, error, isLoading } = usePokemon(debouncedText)
   let { recents } = useRecents(pokemon)
   let { favorites, toggleFavorite } = useFavorites()
-  const cap = (s) => {
+  let cap = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
   return (

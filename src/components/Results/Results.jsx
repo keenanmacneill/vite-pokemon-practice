@@ -1,5 +1,3 @@
-import Favorites from "../Favorites/Favorites"
-
 export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites, cap }) {
   if (isLoading) {
     return <p>{'Loading...'}</p>
