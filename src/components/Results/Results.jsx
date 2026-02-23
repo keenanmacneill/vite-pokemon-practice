@@ -1,5 +1,4 @@
-export default function Results({ isLoading, error, pokemon }) {
-
+export default function Results({ isLoading, error, pokemon, toggleFavorite }) {
   if (isLoading) {
     return <p>{'Loading...'}</p>
   } else if (error) {
@@ -11,7 +10,8 @@ export default function Results({ isLoading, error, pokemon }) {
   } else if (pokemon) {
     return (
       <section className='results'>
-        <img src={`${pokemon['sprites']['other']['official-artwork']['front_default']}`}></img>
+        <img src={`${pokemon['sprites']['other']['official-artwork']['front_default']}`}
+          onClick={() => toggleFavorite(pokemon)}></img>
         {pokemon.types.map((type) => <p>{`${type.type.name}`}</p>
         )}
       </section >
