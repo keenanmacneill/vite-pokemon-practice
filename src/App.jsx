@@ -29,7 +29,6 @@ function App() {
         pokemon={pokemon}
         error={error}
         isLoading={isLoading}
-        isRefreshing={isRefreshing}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
         cap={cap}

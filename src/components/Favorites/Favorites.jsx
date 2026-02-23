@@ -6,7 +6,7 @@ export default function Favorites({ favorites, setQuery, toggleFavorite, cap }) 
       <h2 id='favorite-title'>Favorites</h2>
       <div id='favorite-pokemon'>
         {favorites.map(fav =>
-          <div key={fav.id}>
+          <div key={fav.id} id={`${fav.name}`}>
             <img src={fav.sprite} onClick={() => setQuery(fav.name)}></img>
             <p>{cap(fav.name)}</p>
             <button onClick={() =>

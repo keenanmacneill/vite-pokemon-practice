@@ -11,7 +11,7 @@ export default function Header({ inputText, setInputText, setQuery }) {
 
   return (
     <div id='header'>
-      <h1>Pokédex</h1>
+      <h1 id='header-title'>Pokédex</h1>
       <div id='search'>
         <input
           type='search' placeholder='Search for a Pokemon...'

@@ -1,4 +1,4 @@
-export default function Results({ isLoading, isRefreshing, error, pokemon, toggleFavorite, favorites, query }) {
+export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites, query }) {
   if (!query) return
   if (error) return <p>{`${error}`}</p>
   if (isLoading) return <p>Loading...</p>
@@ -6,7 +6,6 @@ export default function Results({ isLoading, isRefreshing, error, pokemon, toggl
     let isFavorite = favorites.some(favedPoke => favedPoke.name === pokemon.name)
     return (
       <div id='results'>
-        {isRefreshing ? 'Updating...' : null}
         <img src={`${pokemon['sprites']['other']['official-artwork']['front_default']}`}
         ></img>
         {!isFavorite ?

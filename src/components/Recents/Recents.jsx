@@ -6,7 +6,7 @@ export default function Recents({ recents, setQuery, cap }) {
       <h2 id='favorite-title'>Recent Searches</h2>
       <div id='recent-pokemon'>
         {recents.map((poke) => (
-          <div key={poke.id}>
+          <div key={poke.id} id={`${poke.name}`}>
             <img src={poke.sprite} onClick={(() => setQuery(poke.name))}></img>
             <p onClick={(() => setQuery(poke.name))}>{cap(poke.name)}</p>
           </div>
