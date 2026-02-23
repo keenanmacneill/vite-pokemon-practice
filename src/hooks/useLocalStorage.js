@@ -6,7 +6,7 @@ export default function useLocalStorage(key, defaultValue) {
     try {
       return storedValue ? JSON.parse(storedValue) : defaultValue
     }
-    catch (error) {
+    catch {
       return defaultValue
     }
   })
