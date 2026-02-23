@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-export default function usePokemon(debouncedText) {
+export default function usePokemon(query) {
   let [isLoading, setIsLoading] = useState(false)
   let [isRefreshing, setIsRefreshing] = useState(false)
   let [error, setError] = useState('')
@@ -8,10 +8,10 @@ export default function usePokemon(debouncedText) {
   let cacheRef = useRef(new Map())
 
   useEffect(() => {
-    if (!debouncedText) return
-    let hasCache = cacheRef.current.has(debouncedText)
+    if (!query) return
+    let hasCache = cacheRef.current.has(query)
     if (hasCache) {
-      setPokemon(cacheRef.current.get(debouncedText))
+      setPokemon(cacheRef.current.get(query))
       setError('')
       setIsRefreshing(true)
     } else {
@@ -19,7 +19,7 @@ export default function usePokemon(debouncedText) {
       setIsRefreshing(false)
     }
     let controller = new AbortController()
-    fetch(`https://pokeapi.co/api/v2/pokemon/${debouncedText}`, { signal: controller.signal })
+    fetch(`https://pokeapi.co/api/v2/pokemon/${query}`, { signal: controller.signal })
       .then(r => {
         if (!r.ok) {
           setIsLoading(false)
@@ -31,7 +31,7 @@ export default function usePokemon(debouncedText) {
       })
       .then(data => {
         if (!data) return
-        cacheRef.current.set(debouncedText, data)
+        cacheRef.current.set(query, data)
         setPokemon(data)
         setIsLoading(false)
         setIsRefreshing(false)
@@ -45,6 +45,6 @@ export default function usePokemon(debouncedText) {
         setError(err.message)
       })
     return () => controller.abort()
-  }, [debouncedText])
+  }, [query])
   return { pokemon, error, isLoading, isRefreshing }
 }

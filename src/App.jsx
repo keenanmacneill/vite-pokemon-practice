@@ -5,28 +5,45 @@ import Details from './components/Details/Details'
 import Header from './components/Header/Header'
 import Recents from './components/Recents/Recents'
 import Favorites from './components/Favorites/Favorites'
-import useDebounce from './hooks/useDebounce'
 import usePokemon from './hooks/usePokemon'
 import useRecents from './hooks/useRecents'
 import useFavorites from './hooks/useFavorites'
+import useNormQuery from './hooks/useNormQuery'
 
 function App() {
+  let cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : ''
   let [inputText, setInputText] = useState('')
-  let debouncedText = useDebounce(inputText)
-  let { pokemon, error, isLoading, isRefreshing } = usePokemon(debouncedText)
+  let normalizeQuery = (s) => (s ?? '').trim().toLowerCase()
+  let [query, setQuery] = useNormQuery('', normalizeQuery)
+  let { pokemon, error, isLoading, isRefreshing } = usePokemon(query)
   let { recents } = useRecents(pokemon)
   let [favorites, toggleFavorite] = useFavorites()
-  let cap = (s) => {
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
-  let query = debouncedText ?? ''
+
   return (
     <>
-      <Header inputText={inputText} setInputText={setInputText} />
-      <Results pokemon={pokemon} error={error} isLoading={isLoading} isRefreshing={isRefreshing} favorites={favorites} toggleFavorite={toggleFavorite} cap={cap} query={query} />
+      <Header
+        inputText={inputText}
+        setInputText={setInputText}
+        setQuery={setQuery} />
+      <Results
+        pokemon={pokemon}
+        error={error}
+        isLoading={isLoading}
+        isRefreshing={isRefreshing}
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
+        cap={cap}
+        query={query} />
       <Details pokemon={pokemon} />
-      <Favorites favorites={favorites} setInputText={setInputText} toggleFavorite={toggleFavorite} cap={cap} />
-      <Recents recents={recents} setInputText={setInputText} cap={cap} />
+      <Favorites
+        favorites={favorites}
+        setQuery={setQuery}
+        toggleFavorite={toggleFavorite}
+        cap={cap} />
+      <Recents
+        recents={recents}
+        setQuery={setQuery}
+        cap={cap} />
     </>
   )
 }
