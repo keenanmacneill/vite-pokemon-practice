@@ -13,7 +13,7 @@ import useFavorites from './hooks/useFavorites'
 function App() {
   let [inputText, setInputText] = useState('')
   let debouncedText = useDebounce(inputText)
-  let { pokemon, error, isLoading } = usePokemon(debouncedText)
+  let { pokemon, error, isLoading, isRefreshing } = usePokemon(debouncedText)
   let { recents } = useRecents(pokemon)
   let [favorites, toggleFavorite] = useFavorites()
   let cap = (s) => {
@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Header inputText={inputText} setInputText={setInputText} />
-      <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} cap={cap} query={query} />
+      <Results pokemon={pokemon} error={error} isLoading={isLoading} isRefreshing={isRefreshing} favorites={favorites} toggleFavorite={toggleFavorite} cap={cap} query={query} />
       <Details pokemon={pokemon} />
       <Favorites favorites={favorites} setInputText={setInputText} toggleFavorite={toggleFavorite} cap={cap} />
       <Recents recents={recents} setInputText={setInputText} cap={cap} />

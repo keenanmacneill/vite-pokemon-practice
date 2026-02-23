@@ -2,65 +2,49 @@ import { useEffect, useState, useRef } from "react";
 
 export default function usePokemon(debouncedText) {
   let [isLoading, setIsLoading] = useState(false)
+  let [isRefreshing, setIsRefreshing] = useState(false)
   let [error, setError] = useState('')
   let [pokemon, setPokemon] = useState(null)
   let cacheRef = useRef(new Map())
 
   useEffect(() => {
-    if (!debouncedText) {
-      return
-    }
-    if (cacheRef.current.has(debouncedText)) {
+    if (!debouncedText) return
+    let hasCache = cacheRef.current.has(debouncedText)
+    if (hasCache) {
       setPokemon(cacheRef.current.get(debouncedText))
-      setIsLoading(false)
       setError('')
-      let controller = new AbortController()
-      fetch(`https://pokeapi.co/api/v2/pokemon/${debouncedText}`, { signal: controller.signal })
-        .then(r => {
-          if (!r.ok) {
-            return
-          }
-          return r.json()
-
-        })
-        .then(data => {
-          cacheRef.current.set(data.name, data)
-          setPokemon(data)
-        })
-        .catch((err) => {
-          if (err.name === 'AbortError') {
-            return
-          }
-          setError(err.message)
-        })
+      setIsRefreshing(true)
+    } else {
+      setIsLoading(true)
+      setIsRefreshing(false)
     }
-    setIsLoading(true)
     let controller = new AbortController()
     fetch(`https://pokeapi.co/api/v2/pokemon/${debouncedText}`, { signal: controller.signal })
       .then(r => {
         if (!r.ok) {
-          setPokemon(null)
           setIsLoading(false)
+          setIsRefreshing(false)
+          if (hasCache) return null
           throw new Error(`No such Pokemon exists.`)
         }
         return r.json()
-
       })
       .then(data => {
-        cacheRef.current.set(data.name, data)
+        if (!data) return
+        cacheRef.current.set(debouncedText, data)
         setPokemon(data)
         setIsLoading(false)
+        setIsRefreshing(false)
         setError('')
       })
       .catch((err) => {
-        if (err.name === 'AbortError') {
-          return
-        }
+        if (err.name === 'AbortError') return
+        if (!hasCache) setPokemon(null)
         setIsLoading(false)
+        setIsRefreshing(false)
         setError(err.message)
-        setPokemon(null)
       })
     return () => controller.abort()
   }, [debouncedText])
-  return { pokemon, error, isLoading }
+  return { pokemon, error, isLoading, isRefreshing }
 }
