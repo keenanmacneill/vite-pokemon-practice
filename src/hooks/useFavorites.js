@@ -10,14 +10,9 @@ export default function useFavorites() {
       setFavorites(prev => prev.filter(fav => fav.name !== pokemon.name))
       return
     }
-    let newFavorite = {
-      id: pokemon.id,
-      name: pokemon.name,
-      sprite: pokemon['sprites']['other']['official-artwork']['front_default']
-    }
     setFavorites(prev => ([
-      newFavorite,
-      ...prev.filter(poke => poke.name !== newFavorite.name)
+      pokemon,
+      ...prev.filter(favedPoke => favedPoke.name !== pokemon.name)
     ]))
   }
 

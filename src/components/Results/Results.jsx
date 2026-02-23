@@ -1,4 +1,6 @@
-export default function Results({ isLoading, error, pokemon, toggleFavorite }) {
+import Favorites from "../Favorites/Favorites"
+
+export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites }) {
   if (isLoading) {
     return <p>{'Loading...'}</p>
   } else if (error) {
@@ -8,11 +10,19 @@ export default function Results({ isLoading, error, pokemon, toggleFavorite }) {
       </section>
     )
   } else if (pokemon) {
+    let isFavorite = favorites.some(favedPoke => favedPoke.name === pokemon.name)
     return (
       <section className='results'>
         <img src={`${pokemon['sprites']['other']['official-artwork']['front_default']}`}
-          onClick={() => toggleFavorite(pokemon)}></img>
-        {pokemon.types.map((type) => <p>{`${type.type.name}`}</p>
+        ></img>
+        <button onClick={() =>
+          toggleFavorite({
+            id: pokemon.id,
+            name: pokemon.name,
+            sprite: pokemon['sprites']['other']['official-artwork']['front_default']
+          })
+        }>{isFavorite ? 'Click to Remove Favorite' : 'Click to Add Favorite'}</button>
+        {pokemon.types.map((type) => <p key={type.type.name}>{`${type.type.name}`}</p>
         )}
       </section >
     )

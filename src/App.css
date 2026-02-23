@@ -1,0 +1,21 @@
+body {
+  text-align: center;
+}
+
+section {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(3, .25fr);
+}
+
+div {
+    display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(3, .25fr);
+}
+
+img {
+  width: 20%
+}

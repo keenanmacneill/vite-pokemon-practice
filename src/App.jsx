@@ -21,8 +21,8 @@ function App() {
       <Header inputText={inputText} setInputText={setInputText} />
       <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} />
       <Details pokemon={pokemon} />
+      <Favorites favorites={favorites} setInputText={setInputText} toggleFavorite={toggleFavorite} />
       <Recents recents={recents} setInputText={setInputText} />
-      <Favorites favorites={favorites} setInputText={setInputText} />
     </>
   )
 }
