@@ -1,19 +1,20 @@
 body {
   text-align: center;
+
 }
 
-section {
-  display: grid;
+.results {
+    display: grid;
   justify-items: center;
   align-items: center;
   grid-template-rows: repeat(3, .25fr);
 }
 
 div {
-    display: grid;
+  display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-rows: repeat(3, .25fr);
+  grid-template-rows: repeat(2, .25fr);
 }
 
 img {

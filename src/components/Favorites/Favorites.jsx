@@ -2,7 +2,7 @@ export default function Favorites({ favorites, setInputText, toggleFavorite, cap
   if (!favorites || favorites.length === 0) return null
 
   return (
-    <section className='favorites'>
+    <div className='favorites'>
       <h2>Favorites</h2>
       {favorites.map(fav =>
         <div key={fav.id}>
@@ -17,6 +17,6 @@ export default function Favorites({ favorites, setInputText, toggleFavorite, cap
           }>Click to Remove Favorite</button>
         </div>
       )}
-    </section>
+    </div>
   )
 }

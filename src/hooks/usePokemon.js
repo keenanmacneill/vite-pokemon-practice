@@ -14,7 +14,25 @@ export default function usePokemon(debouncedText) {
       setPokemon(cacheRef.current.get(debouncedText))
       setIsLoading(false)
       setError('')
-      return
+      let controller = new AbortController()
+      fetch(`https://pokeapi.co/api/v2/pokemon/${debouncedText}`, { signal: controller.signal })
+        .then(r => {
+          if (!r.ok) {
+            return
+          }
+          return r.json()
+
+        })
+        .then(data => {
+          cacheRef.current.set(data.name, data)
+          setPokemon(data)
+        })
+        .catch((err) => {
+          if (err.name === 'AbortError') {
+            return
+          }
+          setError(err.message)
+        })
     }
     setIsLoading(true)
     let controller = new AbortController()
