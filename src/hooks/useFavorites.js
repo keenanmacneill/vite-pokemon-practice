@@ -10,10 +10,7 @@ export default function useFavorites() {
       setFavorites(prev => prev.filter(fav => fav.name !== pokemon.name))
       return
     }
-    setFavorites(prev => ([
-      pokemon,
-      ...prev.filter(favedPoke => favedPoke.name !== pokemon.name)
-    ]))
+    setFavorites(prev => [...prev, pokemon].sort((a, b) => a.name.localeCompare(b.name)))
   }
 
   return [favorites, toggleFavorite]
