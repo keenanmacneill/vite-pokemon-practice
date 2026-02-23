@@ -15,14 +15,15 @@ function App() {
   let debouncedText = useDebounce(inputText)
   let { pokemon, error, isLoading } = usePokemon(debouncedText)
   let { recents } = useRecents(pokemon)
-  let { favorites, toggleFavorite } = useFavorites()
+  let [favorites, toggleFavorite] = useFavorites()
   let cap = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
+  let query = debouncedText ?? ''
   return (
     <>
       <Header inputText={inputText} setInputText={setInputText} />
-      <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} cap={cap} />
+      <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} cap={cap} query={query} />
       <Details pokemon={pokemon} />
       <Favorites favorites={favorites} setInputText={setInputText} toggleFavorite={toggleFavorite} cap={cap} />
       <Recents recents={recents} setInputText={setInputText} cap={cap} />

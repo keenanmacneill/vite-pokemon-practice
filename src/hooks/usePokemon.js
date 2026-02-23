@@ -6,14 +6,12 @@ export default function usePokemon(debouncedText) {
   let [pokemon, setPokemon] = useState(null)
 
   useEffect(() => {
-    let pokeName = (debouncedText ?? '').trim().toLowerCase()
+    let pokeName = debouncedText ?? ''
     if (pokeName.length === 0) {
-      setError('')
-      setPokemon(null)
-      setIsLoading(false)
       return
     }
     let controller = new AbortController()
+    //eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true)
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`, { signal: controller.signal })
       .then(r => {

@@ -16,6 +16,7 @@ export default function useRecents(pokemon) {
           ).slice(0, 9)]
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemon])
   return { recents }
 }

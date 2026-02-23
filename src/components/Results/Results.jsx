@@ -1,4 +1,7 @@
-export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites, cap }) {
+export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites, cap, query }) {
+  if (!query) {
+    return
+  }
   if (isLoading) {
     return <p>{'Loading...'}</p>
   } else if (error) {

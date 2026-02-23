@@ -16,5 +16,5 @@ export default function useFavorites() {
     ]))
   }
 
-  return { favorites, toggleFavorite }
+  return [favorites, toggleFavorite]
 }
