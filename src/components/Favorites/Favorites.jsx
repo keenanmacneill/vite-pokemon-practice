@@ -1,4 +1,4 @@
-export default function Favorites({ favorites, setInputText, toggleFavorite }) {
+export default function Favorites({ favorites, setInputText, toggleFavorite, cap }) {
   if (!favorites || favorites.length === 0) return null
 
   return (
@@ -6,8 +6,7 @@ export default function Favorites({ favorites, setInputText, toggleFavorite }) {
       <h2>Favorites</h2>
       {favorites.map(fav =>
         <div key={fav.id}>
-          <p>{fav.name}
-          </p>
+          <p>{cap(fav.name)}</p>
           <img src={fav.sprite} onClick={(() => setInputText(fav.name))}></img>
           <button onClick={() =>
             toggleFavorite({

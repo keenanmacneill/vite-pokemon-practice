@@ -16,13 +16,16 @@ function App() {
   let { pokemon, error, isLoading } = usePokemon(debouncedText)
   let { recents } = useRecents(pokemon)
   let { favorites, toggleFavorite } = useFavorites()
+  const cap = (s) => {
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
   return (
     <>
       <Header inputText={inputText} setInputText={setInputText} />
-      <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} />
+      <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} cap={cap} />
       <Details pokemon={pokemon} />
-      <Favorites favorites={favorites} setInputText={setInputText} toggleFavorite={toggleFavorite} />
-      <Recents recents={recents} setInputText={setInputText} />
+      <Favorites favorites={favorites} setInputText={setInputText} toggleFavorite={toggleFavorite} cap={cap} />
+      <Recents recents={recents} setInputText={setInputText} cap={cap} />
     </>
   )
 }

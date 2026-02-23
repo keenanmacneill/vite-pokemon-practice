@@ -1,6 +1,6 @@
 import Favorites from "../Favorites/Favorites"
 
-export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites }) {
+export default function Results({ isLoading, error, pokemon, toggleFavorite, favorites, cap }) {
   if (isLoading) {
     return <p>{'Loading...'}</p>
   } else if (error) {
@@ -22,7 +22,7 @@ export default function Results({ isLoading, error, pokemon, toggleFavorite, fav
             sprite: pokemon['sprites']['other']['official-artwork']['front_default']
           })
         }>{isFavorite ? 'Click to Remove Favorite' : 'Click to Add Favorite'}</button>
-        {pokemon.types.map((type) => <p key={type.type.name}>{`${type.type.name}`}</p>
+        {pokemon.types.map((type) => <p key={type.type.name}>{cap(type.type.name)}</p>
         )}
       </section >
     )
