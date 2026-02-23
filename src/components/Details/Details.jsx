@@ -4,13 +4,15 @@ export default function Details({ pokemon, cap, query, error, isLoading }) {
   if (isLoading) return <p>Loading...</p>
   if (pokemon) {
     return (
-      <div id={`${pokemon.name}-details`}>
-        <p key={pokemon.name}>{`Name: ${cap(pokemon.name)}`}</p>
-        <p key={`${pokemon.name}-types`}> {pokemon.types.length > 1 ? 'Types:' : 'Type:'} {
-          pokemon.types.map(
-            type => type === pokemon.types[pokemon.types.length - 1] ? `${cap(type.type.name)}` : `${cap(type.type.name)}, `
-          )
-        }
+      <div id={'details'}>
+        <p key={pokemon.name}>{cap(pokemon.name)}</p>
+        <p key={`${pokemon.name}-types`}> {
+          pokemon.types.length > 1 ? 'Types:' : 'Type:'
+        } {
+            pokemon.types.map(
+              type => type === pokemon.types[pokemon.types.length - 1] ? `${cap(type.type.name)}` : `${cap(type.type.name)}, `
+            )
+          }
         </p>
       </div>
     )

@@ -4,10 +4,11 @@ export default function Header({ inputText, setInputText, setQuery }) {
     if (e.key !== 'Enter' || !inputText.trim()) return;
     setQuery(inputText)
   }
-  const handleClick = (() => {
+  const handleSearch = (() => {
     if (!inputText.trim()) return;
     setQuery(inputText)
   })
+  const handleRandom = (() => { })
 
   return (
     <div id='header'>
@@ -18,7 +19,8 @@ export default function Header({ inputText, setInputText, setQuery }) {
           value={inputText} onChange={handleChange}
           onKeyDown={handleEnter}>
         </input>
-        <button onClick={handleClick}>Search</button>
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleRandom}>Random</button>
       </div>
     </div>
   )
