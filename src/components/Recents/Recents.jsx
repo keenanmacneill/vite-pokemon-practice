@@ -5,9 +5,9 @@ export default function Recents({ recents, setInputText }) {
     <section>
       <h2>Recent History</h2>
       {recents.map((poke) => (
-        <div key={poke.id}>
+        <div key={poke.id} onClick={(() => setInputText(poke.name))}>
           <p onClick={(() => setInputText(poke.name))}>{poke.name}</p>
-          <img src={poke.sprite} onClick={(() => setInputText(poke.name))}></img>
+          <img src={poke.sprite}></img>
         </div>
       ))}
     </section>

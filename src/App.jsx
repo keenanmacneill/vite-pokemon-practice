@@ -22,7 +22,7 @@ function App() {
       <Results pokemon={pokemon} error={error} isLoading={isLoading} favorites={favorites} toggleFavorite={toggleFavorite} />
       <Details pokemon={pokemon} />
       <Recents recents={recents} setInputText={setInputText} />
-      <Favorites favorites={favorites} />
+      <Favorites favorites={favorites} setInputText={setInputText} />
     </>
   )
 }
